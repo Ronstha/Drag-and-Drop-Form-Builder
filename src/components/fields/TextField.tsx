@@ -29,7 +29,7 @@ type propertiesFormSchemaType = z.infer<typeof propertiesSchema>
 export const TextFieldFormElement: FormElement = {
     type,
     designerComponent: DesignerComponent,
-    formComponent: () => <div>DesignerComponent</div>,
+    formComponent: FormComponent,
     propertiesComponent: PropertiesComponent,
     designerBtnElement: {
         icon: MdTextFields,
@@ -60,6 +60,25 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
                 {required && "*"}
             </Label>
             <Input readOnly placeholder={placeHolder}></Input>
+            {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
+
+        </div>
+    )
+
+}
+function FormComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
+    const element = elementInstance as CustomInstance;
+    const { label, required, placeHolder, helperText } = element.extraAttributes
+    return (
+        <div className="flex flex-col w-full gap-2">
+            <Label>
+
+                {
+                    label
+                }
+                {required && "*"}
+            </Label>
+            <Input  placeholder={placeHolder}></Input>
             {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
 
         </div>
@@ -182,3 +201,4 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
 
     </Form>
 }
+
