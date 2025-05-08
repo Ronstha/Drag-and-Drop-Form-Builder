@@ -60,3 +60,12 @@ export const getForms = async () => {
         }
     })
 }
+
+export async function GetFormById(id:number){
+    const { userId } = await auth()
+    if (!userId) throw new UserNotFoundErr()
+    return await prisma.form.findFirst({where:{
+        userId,
+        id
+    }})
+}
