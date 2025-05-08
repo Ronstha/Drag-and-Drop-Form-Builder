@@ -10,6 +10,7 @@ type DesignerContextType={
   selectedElement:FormElementInstance|null;
   setSelectedElement:Dispatch<SetStateAction<FormElementInstance | null>>;
   updateElement:(id:string,element:FormElementInstance)=>void;
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
 }   
 
 export const DesignerContext=createContext<DesignerContextType|null>(null);
@@ -35,7 +36,7 @@ export default function DesignerContextProvider({children}:{children:ReactNode})
             return newElements
         })
     }
-    return <DesignerContext.Provider value={{elements,addElement,removeElement,selectedElement,setSelectedElement,updateElement}}>
+    return <DesignerContext.Provider value={{elements,addElement,removeElement,selectedElement,setSelectedElement,updateElement,setElements}}>
 {children}
     </DesignerContext.Provider>
 }
