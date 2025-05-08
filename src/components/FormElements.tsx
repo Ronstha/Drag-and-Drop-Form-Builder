@@ -2,7 +2,7 @@ import { IconType } from "react-icons/lib";
 import { TextFieldFormElement } from "./fields/TextField";
 
 export type ElementsType="TextField";
-
+export type SubmitFunction=(key:string,value:string)=>void;
 
 export type FormElement={
     type:ElementsType;
@@ -14,12 +14,16 @@ export type FormElement={
         elementInstance:FormElementInstance
     }>;
     formComponent:React.FC<{
-        elementInstance:FormElementInstance
+        elementInstance:FormElementInstance;
+        submitValue?:SubmitFunction;
+        isInvalid?:boolean;
+        defaultValue?:string;
     }>;
     propertiesComponent:React.FC<{
         elementInstance:FormElementInstance
     }>;
     construct:(id:string)=>FormElementInstance;
+    validate:(FormElement:FormElementInstance,currentValue:string)=>boolean;
 }
 export type FormElementInstance={
     id:string;

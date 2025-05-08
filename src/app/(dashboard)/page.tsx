@@ -94,7 +94,7 @@ interface cardProps {
 
 
 }
-function StatCard({ title, value, helperText, loading, className, icon }: cardProps) {
+export function StatCard({ title, value, helperText, loading, className, icon }: cardProps) {
   return <Card className={className}>
     <CardHeader className="flex flex-row items-center justify-between pb-2">
       <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>

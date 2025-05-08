@@ -95,3 +95,40 @@ data:{
     published:true
 }})
 }
+
+export async function GetFormContentByUrl(formUrl:string){
+    return await prisma.form.update({
+        select:{
+            content:true
+        },
+        where:{
+            shareUrl:formUrl
+        },
+        data:{
+            visits:{
+                increment:1
+        }
+
+        }
+    })
+}
+
+export async function SubmitForm(formUrl:string,content:string){
+    return prisma.form.update({
+        where:{
+            shareUrl:formUrl,
+            published:true
+        },  
+        data:{
+            submissons:{
+                increment:1
+            },
+            forms:{
+                create:{
+                    content
+                }
+            }
+        }
+    })
+
+}
