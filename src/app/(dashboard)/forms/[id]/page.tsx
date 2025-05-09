@@ -8,8 +8,10 @@ import { HiCursorClick } from "react-icons/hi"
 import { TbArrowBounce } from "react-icons/tb"
 import { ElementsType, FormElementInstance } from "@/components/FormElements";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { formatDistance } from "date-fns";
+import { format, formatDistance } from "date-fns";
 import { ReactNode } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default async function Page({params}:{params:{id:string}}){
     const {id}=await params;
@@ -101,6 +103,11 @@ const SubmissonTable=async({id}:{id:number})=>{
   formElements.forEach(element=>{
     switch(element.type){
       case "TextField":
+      case "NumberField":
+      case "TextAreaField":
+      case "DateField":
+      case "SelectField":
+      case "CheckboxField":
         columns.push({
           id:element.id,
           label:element.extraAttributes?.label,
@@ -160,6 +167,18 @@ function RowCell({type,value}:{
   type:ElementsType; value:string;
 }){
   let node:ReactNode=value;
+  switch(type){
+    case "DateField":
+      const date=new Date(value);
+      node=<Badge variant={'outline'}>{format(date,'dd/MM/yyyy')}</Badge>
+      break;
+    case "CheckboxField":
+      const checked=value==="true";
+      node=<Checkbox checked={checked} disabled/>
+      break;
+    default:
+      break;
+  }
   return <TableCell>{node}</TableCell>
 
 }
