@@ -30,10 +30,11 @@ const FormBuilder=({form}:{form:Form})=>{
         }
     })
     const sensors=useSensors(mouseSensor,touchSensor)
-    const {setElements}=useDesigner()
+    const {setElements,setSelectedElement}=useDesigner()
     useEffect(()=>{
         setElements(JSON.parse(form.content))
-    },[])
+        setSelectedElement(null)
+    },[setSelectedElement,setElements])
     const shareURL=`${window.location.origin}/submit/${form.shareUrl}`
     if(form.published){
         return <>
