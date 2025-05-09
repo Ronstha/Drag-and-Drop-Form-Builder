@@ -21,7 +21,7 @@ const FormSubmitComponent = ({ formUrl, content }: {
             const actualValue = formValues.current[field.id] || "";
             const valid = FormElements[field.type].validate(field, actualValue);
             if (!valid) {
-                formErrors.current[field.id] == true;
+                formErrors.current[field.id] = true;
 
             }
 
@@ -41,6 +41,7 @@ const FormSubmitComponent = ({ formUrl, content }: {
         if (!valid) {
             setRenderKey(new Date().getTime())
             toast.error("Error", { description: 'Please check the form for errors' })
+            return
         }
         try {
             const JsonContent = JSON.stringify(formValues.current)
