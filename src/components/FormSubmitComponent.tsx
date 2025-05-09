@@ -71,7 +71,7 @@ const FormSubmitComponent = ({ formUrl, content }: {
                 {
                     content.map((element) => {
                         const FormElement = FormElements[element.type].formComponent;
-                        return <FormElement key={element.id} elementInstance={element} submitValue={submitValue} isInvalid={formErrors.current[element.id]} defaultValue={formValues.current[element.id]} />
+                        return <FormElement key={element.id} elementInstance={element} submitValue={submitValue} isInvalid={formErrors.current[element.id]} defaultValue={formValues.current[element.id]??""} />
                     })
                 }
                 <Button className='mt-8' onClick={() => { startTransition(submitForm) }}>
